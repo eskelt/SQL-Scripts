@@ -1,18 +1,3 @@
-CREATE SEQUENCE IF NOT EXISTS public.'ROOMS_ID_ROOM_seq'
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CACHE 1
-    OWNED BY 'ROOMS'.'ID';
-
-ALTER SEQUENCE public.'ROOMS_ID_ROOM_seq'
-    OWNER TO postgres;
-
-
-
-
-
 -- Table: public.ROOMS
 
 -- DROP TABLE IF EXISTS public."ROOMS";
@@ -32,9 +17,23 @@ ALTER TABLE IF EXISTS public."ROOMS"
     OWNER to postgres;
 
 
+CREATE SEQUENCE IF NOT EXISTS public.'ROOMS_ID_ROOM_seq'
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1
+    OWNED BY 'ROOMS'.'ID';
+
+ALTER SEQUENCE public.'ROOMS_ID_ROOM_seq'
+    OWNER TO postgres;
 
 
 
+
+-- Table: public.GUESTS
+
+-- DROP TABLE IF EXISTS public."GUESTS";
 CREATE TABLE IF NOT EXISTS public."GUESTS"
 (
     "ID_SESSION" uuid NOT NULL,
