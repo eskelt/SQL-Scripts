@@ -2,33 +2,45 @@
 
 -- DROP TABLE IF EXISTS public."ROOMS";
 
-CREATE TABLE IF NOT EXISTS public."ROOMS"
-(
-    "ID" integer NOT NULL DEFAULT nextval('"ROOMS_ID_ROOM_seq"'::regclass),
-    "NAME" character varying(20) COLLATE pg_catalog."default" NOT NULL,
+--
+-- TOC entry 215 (class 1259 OID 16426)
+-- Name: ROOMS; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."ROOMS" (
+    "ID" integer NOT NULL,
+    "NAME" character varying(20) NOT NULL,
     "PLAYER_1" integer,
-    "PLAYER_2" integer,
-    CONSTRAINT "ROOMS_pkey" PRIMARY KEY ("ID")
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public."ROOMS"
-    OWNER to postgres;
+    "PLAYER_2" integer
+	CONSTRAINT "ROOMS_pkey" PRIMARY KEY ("ID")
+);
 
 
-CREATE SEQUENCE IF NOT EXISTS public.'ROOMS_ID_ROOM_seq'
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 2147483647
-    CACHE 1
-    OWNED BY 'ROOMS'.'ID';
+ALTER TABLE public."ROOMS" OWNER TO postgres;
 
-ALTER SEQUENCE public.'ROOMS_ID_ROOM_seq'
-    OWNER TO postgres;
+--
+-- TOC entry 214 (class 1259 OID 16425)
+-- Name: ROOMS_ID_ROOM_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."ROOMS_ID_ROOM_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
+ALTER TABLE public."ROOMS_ID_ROOM_seq" OWNER TO postgres;
+
+--
+-- TOC entry 3357 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: ROOMS_ID_ROOM_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."ROOMS_ID_ROOM_seq" OWNED BY public."ROOMS"."ID";
 
 
 -- Table: public.GUESTS
