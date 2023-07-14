@@ -116,39 +116,6 @@ ALTER TABLE public."ROOMS_ID_ROOM_seq" OWNER TO postgres;
 
 ALTER SEQUENCE public."ROOMS_ID_ROOM_seq" OWNED BY public."ROOMS"."ID";
 
-
---
--- TOC entry 218 (class 1259 OID 16446)
--- Name: spring_session; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.spring_session (
-    primary_id character(36) NOT NULL,
-    session_id character(36) NOT NULL,
-    creation_time bigint NOT NULL,
-    last_access_time bigint NOT NULL,
-    max_inactive_interval integer NOT NULL,
-    expiry_time bigint NOT NULL,
-    principal_name character varying(100)
-);
-
-
-ALTER TABLE public.spring_session OWNER TO postgres;
-
---
--- TOC entry 219 (class 1259 OID 16454)
--- Name: spring_session_attributes; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.spring_session_attributes (
-    session_primary_id character(36) NOT NULL,
-    attribute_name character varying(200) NOT NULL,
-    attribute_bytes bytea NOT NULL
-);
-
-
-ALTER TABLE public.spring_session_attributes OWNER TO postgres;
-
 --
 -- TOC entry 3191 (class 2604 OID 16436)
 -- Name: GUESS_HISTORY ID_GUESS_HISTORY; Type: DEFAULT; Schema: public; Owner: postgres
@@ -193,63 +160,12 @@ ALTER TABLE ONLY public."ROOMS"
 
 
 --
--- TOC entry 3204 (class 2606 OID 16460)
--- Name: spring_session_attributes spring_session_attributes_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.spring_session_attributes
-    ADD CONSTRAINT spring_session_attributes_pk PRIMARY KEY (session_primary_id, attribute_name);
-
-
---
--- TOC entry 3202 (class 2606 OID 16450)
--- Name: spring_session spring_session_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.spring_session
-    ADD CONSTRAINT spring_session_pk PRIMARY KEY (primary_id);
-
-
---
--- TOC entry 3198 (class 1259 OID 16451)
--- Name: spring_session_ix1; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE UNIQUE INDEX spring_session_ix1 ON public.spring_session USING btree (session_id);
-
-
---
--- TOC entry 3199 (class 1259 OID 16452)
--- Name: spring_session_ix2; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX spring_session_ix2 ON public.spring_session USING btree (expiry_time);
-
-
---
--- TOC entry 3200 (class 1259 OID 16453)
--- Name: spring_session_ix3; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX spring_session_ix3 ON public.spring_session USING btree (principal_name);
-
-
---
 -- TOC entry 3207 (class 2606 OID 16441)
 -- Name: GUESS_HISTORY ID_ROOM; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."GUESS_HISTORY"
     ADD CONSTRAINT "ID_ROOM" FOREIGN KEY ("ID_ROOM") REFERENCES public."ROOMS"("ID");
-
-
---
--- TOC entry 3208 (class 2606 OID 16461)
--- Name: spring_session_attributes spring_session_attributes_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.spring_session_attributes
-    ADD CONSTRAINT spring_session_attributes_fk FOREIGN KEY (session_primary_id) REFERENCES public.spring_session(primary_id) ON DELETE CASCADE;
 
 
 -- Completed on 2023-05-23 01:52:48
